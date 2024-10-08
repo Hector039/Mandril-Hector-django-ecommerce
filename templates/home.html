@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<h1>Welcome Home</h1>
+
+{% for product in products %}
+<p>{{product.title}}</p>
+<p>{{product.description}}</p>
+<p>{{product.price}}</p>
+<p>{{product.category}}</p>
+<a href="{% url 'product-detail' product.id %}">Detail</a>
+<a href="{% url 'product-buy' product.id %}">Buy</a>
+{% endfor %}
+{% endblock %}

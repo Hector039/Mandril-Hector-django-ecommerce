@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<h1>Product Detail</h1>
+<p>{{product.title}}</p>
+<p>{{product.description}}</p>
+<p>{{product.price}}</p>
+<p>{{product.stock}}</p>
+<p>Vendedor: {{product.owner}}</p>
+{% if user.is_authenticated and user == product.owner %}
+<a href="{% url 'product-update' product.id %}">Update</a>
+{% elif user.is_authenticated and user.id != product.owner %}
+<a href="{% url 'product-buy' product.id %}">Buy</a>
+{% endif %}
+{% endblock %}

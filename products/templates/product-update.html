@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<h1>Product Update</h1>
+{{error}}
+<form action="{% url 'product-update' product.id %}" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+<button>Update</button>
+</form>
+
+<a href="{% url 'product-delete' product.id %}"></a>
+</form>
+{% endblock %}
