@@ -49,5 +49,5 @@ def deleteProduct(req, pid):
         return render(req, "product-update.html", {"form": productform, "product": product, "error": error})
 
 def buyProduct(req, pid):
-    product = get_object_or_404(Product, pk=pid)
-    return render(req, "product-buy.html", {"product": product})
+    products = Product.objects.all()
+    return render(req, "home.html", {"products": products, "message": 'Coming soon'})

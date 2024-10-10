@@ -14,10 +14,10 @@
 <form action="{% url 'add-to-cart' user.id product.id %}" method="post">
     {% csrf_token %}
     <label for="quantity">Choose quantity:</label>
-    <input type="number" name="quantity" id="quantity">
+    <input type="number" name="quantity" id="quantity" min="1" value="1">
     <button>Add to cart</button>
 </form>
-<a href="{% url 'product-buy' user.id %}">Buy</a>
+<a href="{% url 'product-buy' product.id %}">Buy</a>{{message}}
 {% endif %}
 {% empty %}
 <p>There are no products yet</p>

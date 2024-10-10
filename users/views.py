@@ -6,9 +6,6 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 
 # Create your views here.
-def home(req):
-    return render(req, "home.html")
-
 def signIn(req):
     if req.method == "POST":
         try:
