@@ -10,6 +10,12 @@
 {% if user.is_authenticated and user == product.owner %}
 <a href="{% url 'product-update' product.id %}">Update</a>
 {% elif user.is_authenticated and user.id != product.owner %}
+<form action="{% url 'add-to-cart' user.id product.id %}" method="post">
+    {% csrf_token %}
+    <label for="quantity">Choose quantity:</label>
+    <input type="number" name="quantity" id="quantity">
+    <button>Add to cart</button>
+</form>
 <a href="{% url 'product-buy' product.id %}">Buy</a>
 {% endif %}
 {% endblock %}

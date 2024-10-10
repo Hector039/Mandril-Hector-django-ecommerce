@@ -2,6 +2,7 @@
 
 {% block content %}
 <h1>Welcome Home</h1>
+{{error}}
 
 {% for product in products %}
 <p>{{product.title}}</p>
@@ -9,6 +10,16 @@
 <p>{{product.price}}</p>
 <p>{{product.category}}</p>
 <a href="{% url 'product-detail' product.id %}">Detail</a>
-<a href="{% url 'product-buy' product.id %}">Buy</a>
+{% if user.is_authenticated and user != product.owner %}
+<form action="{% url 'add-to-cart' user.id product.id %}" method="post">
+    {% csrf_token %}
+    <label for="quantity">Choose quantity:</label>
+    <input type="number" name="quantity" id="quantity">
+    <button>Add to cart</button>
+</form>
+<a href="{% url 'product-buy' user.id %}">Buy</a>
+{% endif %}
+{% empty %}
+<p>There are no products yet</p>
 {% endfor %}
 {% endblock %}
