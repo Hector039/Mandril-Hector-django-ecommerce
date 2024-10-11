@@ -1,7 +1,8 @@
 {% extends 'main.html' %}
-
+{% block title %} Create {% endblock title %}
+{% block title_h1 %} Create {% endblock title_h1 %}
+{% block title_h2 %} your product {% endblock title_h2 %}
 {% block content %}
-<h1>Create yur product:</h1>
 {{error}} {{message}}
 <form action="{% url 'product-create' %}" method="POST">
     {% csrf_token %}

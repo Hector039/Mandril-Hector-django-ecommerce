@@ -1,12 +1,14 @@
 {% extends 'main.html' %}
+{% block title %} Login {% endblock title %}
+{% block title_h1 %} Login! {% endblock title_h1 %}
+{% block title_h2 %} And start to buy/sell products. {% endblock title_h2 %}
 
 {% block content %}
-<h1>Sign In!</h1>
 {{error}}
 <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <button>Sign me in!</button>
+    <button class="btn btn-primary">Sign me in!</button>
 </form>
 {% endblock %}
 

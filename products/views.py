@@ -1,13 +1,30 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import Product
-from .forms import ProductForm
+from .forms import ProductForm, ProductSearchForm
 from users.models import CustomUser
-
 
 # Create your views here.
 def getProducts(req):
-    products = Product.objects.all()
-    return render(req, "home.html", {"products": products})
+    searchForm = ProductSearchForm(req.GET)
+    data = searchForm.data.get('title') if searchForm.data.get('title') is not None else ''
+    category = searchForm.data.get('category')
+    price = searchForm.data.get('price')
+    if category != 'all' and category is not None:
+                if price == 'descending':
+                    productsFiltered = Product.objects.filter(category=category).filter(title__icontains=data).order_by('-price').values()
+                elif price == 'ascending':
+                    productsFiltered = Product.objects.filter(category=category).filter(title__icontains=data).order_by('price').values()
+                else:
+                    productsFiltered = Product.objects.filter(category=category).filter(title__icontains=data)
+                return render(req, "home.html", {"products": productsFiltered, 'searchForm': searchForm})
+    else:
+                if price == 'descending':
+                    productsFiltered = Product.objects.filter(title__icontains=data).order_by('-price').values()
+                elif price == 'ascending':
+                    productsFiltered = Product.objects.filter(title__icontains=data).order_by('price').values()
+                else:
+                    productsFiltered = Product.objects.filter(title__icontains=data)
+                return render(req, "home.html", {"products": productsFiltered, 'searchForm': searchForm})
 
 def getProduct(req, pid):
     product = get_object_or_404(Product, pk=pid)

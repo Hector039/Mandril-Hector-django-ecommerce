@@ -1,21 +1,36 @@
 {% extends 'main.html' %}
+{% block title %} Detail {% endblock title %}
+{% block title_h1 %} Details {% endblock title_h1 %}
+{% block title_h2 %} of selected product. {% endblock title_h2 %}
 
 {% block content %}
-<h1>Product Detail</h1>
-<p>{{product.title}}</p>
-<p>{{product.description}}</p>
-<p>{{product.price}}</p>
-<p>{{product.stock}}</p>
-<p>Vendedor: {{product.owner}}</p>
-{% if user.is_authenticated and user == product.owner %}
-<a href="{% url 'product-update' product.id %}">Update</a>
-{% elif user.is_authenticated and user.id != product.owner %}
-<form action="{% url 'add-to-cart' user.id product.id %}" method="post">
-    {% csrf_token %}
-    <label for="quantity">Choose quantity:</label>
-    <input type="number" name="quantity" id="quantity" min="1" value="1" >
-    <button>Add to cart</button>
-</form>
-<a href="{% url 'product-buy' product.id %}">Buy</a>
-{% endif %}
-{% endblock %}
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{product.title}}</h5>
+          <p class="card-text">{{product.description}}</p>
+          <p class="card-text"><small class="text-muted">Price: ${{product.price}}</small></p>
+          <p class="card-text"><small class="text-muted">Stock: {{product.stock}}</small></p>
+          <p class="card-text"><small class="text-muted">Category: {{product.category}}</small></p>
+          <p class="card-text"><small class="text-muted">Owner: {{product.owner}}</small></p>
+          {% if user.is_authenticated and user == product.owner %}
+          <a href="{% url 'product-update' product.id %}" class="btn btn-primary">Update your product</a>
+          {% elif user.is_authenticated and user.id != product.owner %}
+          <form action="{% url 'add-to-cart' user.id product.id %}" method="post">
+              {% csrf_token %}
+              <label for="quantity">Choose quantity:</label>
+              <input type="number" name="quantity" id="quantity" min="1" value="1" >
+              <button class="btn btn-primary">Add to cart</button>
+            </form>
+            <a href="{% url 'product-buy' product.id %}" class="btn btn-primary">Buy</a>
+        {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+  
