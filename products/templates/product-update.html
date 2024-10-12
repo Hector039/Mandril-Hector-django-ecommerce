@@ -4,11 +4,11 @@
 {% block title_h2 %} your product. {% endblock title_h2 %}
 {% block content %}
 {{error}}
-<form action="{% url 'product-update' product.id %}" method="POST">
+<form action="{% url 'product-update' product.id %}" method="POST" class="container m-5">
     {% csrf_token %}
     {{form.as_p}}
 <button class="btn btn-primary">Update</button>
+<a href="{% url 'product-delete' product.id %}" class="btn btn-primary">Delete</a>
 </form>
 
-<a href="{% url 'product-delete' product.id %}" class="btn btn-primary">Delete</a>
 {% endblock %}

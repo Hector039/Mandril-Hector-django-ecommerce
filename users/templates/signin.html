@@ -5,11 +5,16 @@
 
 {% block content %}
 {{error}}
-<form method="POST">
+    <form method="POST" class="m-5">
     {% csrf_token %}
-    {{ form.as_p }}
+        {{form.as_p}}
     <button class="btn btn-primary">Sign me in!</button>
 </form>
+</div>
+
+
+
+
 {% endblock %}
 
 

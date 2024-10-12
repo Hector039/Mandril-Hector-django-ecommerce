@@ -1,8 +1,10 @@
 {% extends 'main.html' %}
+{% block title %} Cart {% endblock title %}
+{% block title_h1 %} Your Cart {% endblock title_h1 %}
+{% block title_h2 %} Administrate your products {% endblock title_h2 %}
 
 {% block content %}
-<h1>Cart Detail</h1>
-<table>
+<table class="table table-hover m-5">
     <thead>
         <tr>
             <th></th>
@@ -39,9 +41,10 @@
     </tfoot>
 </table>
 {% if cart|length != 0 %}
-<a href="{% url 'empty-cart' user.id %}">Empty cart</a> {{message}} {{error}}
+<a href="{% url 'empty-cart' user.id %}" class="btn btn-primary m-3">Empty cart</a> {{message}} {{error}}
 {% if user.is_authenticated and user != product.owner %}
-<a href="{% url 'product-buy' user.id %}">Buy</a>
+<a href="{% url 'product-buy' user.id %}" class="btn btn-primary m-3">Buy</a>
 {% endif %}
 {% endif %}
+<a class="btn btn-primary m-3" aria-current="page" href="{% url 'home' %}">Home</a>
 {% endblock %}

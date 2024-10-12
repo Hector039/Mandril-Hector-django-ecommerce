@@ -4,14 +4,12 @@
 {% block title_h2 %} of selected product. {% endblock title_h2 %}
 
 {% block content %}
-<div class="card mb-3" style="max-width: 540px;">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" class="img-fluid rounded-start" alt="...">
+    <div class="container row m-5">
+      <div class="col">
+        <img src="https://dummyimage.com/600x600/dee2e6/6c757d.jpg" class="img-fluid rounded-start" alt="...">
       </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">{{product.title}}</h5>
+      <div class="col align-self-center">
+          <h4 class="card-title">{{product.title}}</h4>
           <p class="card-text">{{product.description}}</p>
           <p class="card-text"><small class="text-muted">Price: ${{product.price}}</small></p>
           <p class="card-text"><small class="text-muted">Stock: {{product.stock}}</small></p>
@@ -28,9 +26,8 @@
             </form>
             <a href="{% url 'product-buy' product.id %}" class="btn btn-primary">Buy</a>
         {% endif %}
-        </div>
+        <a class="btn btn-primary m-3" aria-current="page" href="{% url 'home' %}">Home</a>
       </div>
     </div>
-  </div>
   {% endblock %}
   

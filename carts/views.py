@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from users.models import CustomUser
 from products.models import Product
+from products.forms import ProductSearchForm
 from .models import Cart
 
 def getUserCart(req, uid, msg='', err=''):
@@ -45,6 +46,7 @@ def buyCart(req, uid):
     return getUserCart(req, uid, msg='Coming soon.')
 
 def addToCart(req, uid, pid):
+    searchForm = ProductSearchForm(req.GET)
     if req.method == 'POST':
         try:
             user = CustomUser.objects.get(pk=uid)
@@ -54,6 +56,6 @@ def addToCart(req, uid, pid):
             redirect('home')
         except Exception as error:
             products = Product.objects.all()
-            return render(req, "home.html", {"products": products, "error": error})
+            return render(req, "home.html", {"products": products, "error": error, 'searchForm': searchForm})
         
     return getUserCart(req, uid)

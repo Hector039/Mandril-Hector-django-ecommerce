@@ -4,9 +4,9 @@
 {% block title_h2 %} your product {% endblock title_h2 %}
 {% block content %}
 {{error}} {{message}}
-<form action="{% url 'product-create' %}" method="POST">
+<form action="{% url 'product-create' %}" method="POST"  class="container m-5">
     {% csrf_token %}
     {{form.as_p}}
-<button>Create</button>
+<button class="btn btn-primary">Create</button>
 </form>
 {% endblock %}
